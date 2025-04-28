@@ -17,21 +17,24 @@ const winPatterns = [   // box pattern for winning position
     [6, 7, 8]
 ];
 
-boxes.forEach((box) => {  // taking each move and placing them in box
+boxes.forEach((box) => {
     box.addEventListener("click", () => {
         if (turn0) {
             box.innerText = "0";
+            box.style.color = "blue"; // 0 will be blue
             turn0 = false;
         } else {
             box.innerText = "X";
+            box.style.color = "red"; // X will be red
             turn0 = true;
         }
         box.disabled = true;
 
-        moveNumber++;  // Increase move number after each move
+        moveNumber++;
         checkWinner();
     });
 });
+
 
 const handleResetOrNewGame = (message) => {  // for reset or start new game
     const userConfirmed = window.confirm(message);
