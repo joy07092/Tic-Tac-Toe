@@ -38,6 +38,7 @@ const handleResetOrNewGame = (message) => {  // for reset or start new game
     if (userConfirmed) {
         boxes.forEach((box) => {
             box.innerText = "";
+            box.style.backgroundColor = "#ffffc7";
             box.disabled = false;
         });
         turn0 = false;
@@ -69,15 +70,20 @@ const checkWinner = () => {
 
         if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
             if (pos1Val === pos2Val && pos2Val === pos3Val) {
+                // Highlight winning pattern
+                pattern.forEach((index) => {
+                    boxes[index].style.backgroundColor = "#90EE90"; // light green color
+                });
+
                 showWinner(pos1Val);
                 boxes.forEach((box) => box.disabled = true);
                 resetBtn.classList.add("hide");
-                return; // If someone wins, stop here, no need to check draw
+                return;
             }
         }
     }
 
-    // Check for draw if no one has won yet
+    // Check for draw
     if (moveNumber === 9) {
         showDraw();
         boxes.forEach((box) => box.disabled = true);
